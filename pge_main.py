@@ -2,6 +2,7 @@
 import os
 import csv
 import sqlite3
+import zipfile
 
 
 # Steps to move file and prepare
@@ -43,8 +44,7 @@ def build_electric_csv():
                         # if str.isalnum(row[0]):
                         #     # print('skipping {}'.format(row))
                         #     continue
-
-                        if str(row[0]).startswith('Electric') is False:
+                        if len(row) != 8 or str(row[0]).startswith('Electric') is False:
                             continue
 
                         elecdate = str('{}').format(row[1])
@@ -128,7 +128,25 @@ def write_to_db():
     conn.commit()
     conn.close()
 
+
+def process_zip_file(folder):
+    for dir, subdir, files in os.walk(folder):
+        for f in files:
+            if f.startswith('DailyUsageData'):
+                zip_file = folder + f
+
+                with zipfile.ZipFile(zip_file) as zip_pge:
+                    pge_files = zip_pge.namelist()
+                    for pge_file in pge_files:
+                        # extraction will land in the pge folder because
+                        # this is where the python script originates
+                        zip_pge.extract(pge_file)
+
+
 if __name__ == '__main__':
+
+    download_folder = '/Users/dscharton/Downloads/'
+    process_zip_file(download_folder)
     build_electric_csv()
     # build_gas_csv()
     # write_to_db()
