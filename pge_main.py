@@ -86,47 +86,23 @@ def build_gas_csv():
                         #     # print('skipping {}'.format(row))
                         #     continue
 
-                        if str(row[0]).startswith('Natural') is False:
+                        if len(row) != 6 or str(row[0]).startswith('Natural') is False:
                             continue
 
                         elecdate = str('{}').format(row[1])
+                        elecdatenum = elecdate[0:4] + elecdate[5:7] + elecdate[8:10]
                         usage = row[2]
                         cost = row[4].lstrip('$')
-                        data.append((elecdate, usage, cost))
-                        rowtogas = (elecdate, usage, cost)
+                        data.append((elecdate, elecdatenum, usage, cost))
+                        rowtogas = (elecdate, elecdatenum, usage, cost)
                         with open(eleccsv, 'a') as e:
                             writer = csv.writer(e)
                             writer.writerow(rowtogas)
 
-
-    csr.executemany('insert into gas values(?, ?, ?)', data)
+    csr.executemany('insert into gas values(?, ?, ?, ?)', data)
     conn.commit()
     conn.close()
     # print(data)
-def write_to_db():
-    conn = sqlite3.connect('energy.sqlite')
-    csr = conn.cursor()
-
-    # createtable = '''
-    #     create table elec (
-    #         elec_date text,
-    #         elec_hr text,
-    #         usage real,
-    #         cost real);
-    # '''
-    # csr.execute(createtable)
-
-
-    with open(eleccsv, 'r') as elec:
-        reader = csv.reader(elec)
-        for row in reader:
-            sql = '''
-                insert into elec values (?, ?, ?, ?)
-            '''
-            csr.execute(sql, row)
-
-    conn.commit()
-    conn.close()
 
 
 def process_zip_file(folder):
@@ -148,5 +124,5 @@ if __name__ == '__main__':
     download_folder = '/Users/dscharton/Downloads/'
     process_zip_file(download_folder)
     build_electric_csv()
-    # build_gas_csv()
+    build_gas_csv()
     # write_to_db()
