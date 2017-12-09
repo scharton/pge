@@ -17,7 +17,7 @@ Daily usage downloads are provided daily for gas and electric.
 
 ## Database
 The program currently is designed to work with a SQLite 3 database specifically named
-**energy.sqlite**.
+**energy.sqlite** and place it in the root of this project.
 
 ### Database Preparation
 Until automated in the Python code, prepare your database with this one-time setup.
