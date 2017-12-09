@@ -105,10 +105,7 @@ def process_zip_file(folder):
 
 
 if __name__ == '__main__':
-    if False:
-        print('hi')
-    else:
-        download_folder = '/Users/dscharton/Downloads/'
-        process_zip_file(download_folder)
-        load_electric()
-        load_gas()
+    download_folder = '/Users/dscharton/Downloads/'
+    process_zip_file(download_folder)
+    load_electric()
+    load_gas()
