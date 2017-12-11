@@ -2,6 +2,7 @@ import os
 import csv
 import sqlite3
 import zipfile
+import configparser
 
 
 csvdatafolder = './csvdata'
@@ -104,7 +105,9 @@ def process_zip_file(folder):
 
 
 if __name__ == '__main__':
-    download_folder = '/Users/dscharton/Downloads/'
+    cp = configparser.ConfigParser()
+    cp.read('pge.cfg')
+    download_folder = cp.get('default', 'download_folder')
     process_zip_file(download_folder)
     load_electric()
     load_gas()

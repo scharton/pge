@@ -2,3 +2,4 @@
 *.csv
 energy.sqlite
 .idea/
+pge.cfg

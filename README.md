@@ -8,6 +8,16 @@ as it evolves.
 An online account with PG&E is necessary. Data files are accessible through the usage
 link and "Green Button" download page.
 
+## Config File
+A config file named `pge.cfg` needs to be created to identify configurable parts of this project. Keep this file
+in the root of the project.
+
+### Config file sample
+```text
+[default]
+download_folder = '/Users/me/Downloads/'
+```
+
 ## Files
 Daily usage downloads are provided daily for gas and electric.
 
