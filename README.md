@@ -41,7 +41,7 @@ CREATE TABLE gas
 
 COMMIT;
 ```
-### Tables
+### Staging Tables
 Two staging tables created in the previous section `elec` and `gas` are loaded with 
 the raw CSV data through the function sequence:
 ```python
@@ -51,3 +51,10 @@ if __name__ == '__main__':
     load_electric()
     load_gas()
 ```
+
+### Summary Tables
+Until rolled into the Python, summary tables area created by running the SQL files in a SQLite
+client.
+
+After loading the staging tables, run `load_electric.sql` and `load_gas.sql`. These are in the **sql** 
+folder.

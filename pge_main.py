@@ -25,7 +25,7 @@ def load_electric():
         for f in files:
             if f.startswith(elecfile):
                 fullfile = dir + '/' + f
-                with open(fullfile, 'r+') as pgefile:
+                with open(fullfile, 'r+', encoding='utf-8') as pgefile:
                     reader = csv.reader(pgefile)
                     for row in reader:
                         # Each real record starts with "Electric" as the first item
@@ -61,7 +61,7 @@ def load_gas():
         for f in files:
             if f.startswith(gasfile):
                 fullfile = dir + '/' + f
-                with open(fullfile, 'r+') as pgefile:
+                with open(fullfile, 'r+', encoding='utf-8') as pgefile:
                     reader = csv.reader(pgefile)
                     for row in reader:
                         if len(row) != 6 or str(row[0]).startswith('Natural') is False:
