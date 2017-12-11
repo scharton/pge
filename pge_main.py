@@ -8,7 +8,6 @@ csvdatafolder = './csvdata'
 
 elecfile = 'pge_electric_interval_data'
 gasfile = 'pge_gas_interval_data'
-sample = 'pge_electric_interval_data_4575820864_2017-06-10_to_2017-07-09.csv'
 eleccsv = 'electric.csv'
 
 def load_electric():
